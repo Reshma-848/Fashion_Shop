@@ -6,7 +6,7 @@ service FashionShop_Service {
     entity Fashion_Items as projection on fashionShop.Fashion_Items;
     entity Srv_FashionShop as projection on fashionShop.YC_FashionShop;
 }
-
+@odata.draft.enabled
 annotate fashionShop.Fashion_Items with @(UI :{
     HeaderInfo  : {
         $Type : 'UI.HeaderInfoType',
@@ -23,32 +23,57 @@ annotate fashionShop.Fashion_Items with @(UI :{
         price
     ],
     LineItem  : [
-        {Value: fashionType.section.name,
-        Label:'Name'},
-        {Value: fashionType.typename,
-        Label:'Fashion Type'},
-        {Value:itemname},
-        {Value:brand},
-        {Value:size},
-        {Value:price},
-        {Value:currency_code},
+        {Value: fashionType.section.name, Label:'Name'},
+        {Value: fashionType.typename, Label:'Fashion Type'},
+        {Value: itemname},
+        {Value: brand},
+        {Value: size},
+        {Value: price},
+        {Value: currency_code}
     ],
     Facets    : [{
         $Type : 'UI.CollectionFacet',
-        Label : 'Fashion Details',
-        Facets: [{
-            $Type : 'UI.ReferenceFacet',
-            Target: '@UI.FieldGroup#ItemDetails',
-        }]
-    }],
+        ID :'1',
+        Label : 'Fashion Type & Section',
+        Facets: [
+            {
+                $Type : 'UI.ReferenceFacet',
+                Target: '@UI.FieldGroup#TypeSection'
+            },
+            {
+                $Type : 'UI.CollectionFacet',
+                ID:'2',
+                Label : 'Fashion Item',
+                Facets: [
+                    {
+                        $Type : 'UI.ReferenceFacet',
+                        Target: '@UI.FieldGroup#FItem'
+                    }
+                ]
+            }
+        ]
+    }]
+});
 
-    FieldGroup #ItemDetails : {Data : [
+annotate fashionShop.Fashion_Items with @(UI.FieldGroup #TypeSection : {
+    Data : [
         {Value: fashionType_id},
         {Value: fashionType.typename},
+        {Value: fashionType.description},
+        {Value: fashionType.section.id},
+        {Value: fashionType.section.name}
+    ]
+});
+
+annotate fashionShop.Fashion_Items with @(UI.FieldGroup #FItem : {
+    Data : [
+        {Value: id},
         {Value: itemname},
+        {Value: brand},
+        {Value: material},
         {Value: size},
         {Value: price},
-
-    ]   
-    },
+        {Value: currency_code},
+        {Value: isAvailable}
+    ]
 });
