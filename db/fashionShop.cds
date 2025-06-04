@@ -28,3 +28,29 @@ entity Fashion_Items {
     currency : Currency;
     isAvailable : Flag;
 }
+
+//View creation for Fashion_Shop
+
+view YC_FashionShop as select from Fashion_Items as fItem
+{
+       fItem.fashionType.section.id as sectionId,
+       fItem.fashionType.section.name as sectionName,
+       fItem.fashionType.section.description as sectionDesc,
+       fItem.fashionType.id as fashionTypeId,
+       fItem.fashionType.typename as fashionTypeName,
+       fItem.fashionType.description as fashionTypeDesc,
+       fItem.id as fahsionItemId,
+       fItem.itemname as fashionItemName,
+       fItem.brand as brand,
+       fItem.size as size,
+       fItem.material as material,
+       fItem.price as  price,
+       fItem.currency as currency,
+    //    fItem.isAvailable as isAvailable,
+       concat (fItem.brand,concat(' ',fItem.itemname)) as itemDetails : String (32),
+       case 
+            when fItem.price >= 500 then 'Premium'
+            when fItem.price >= 100 and fItem.price < 500 then 'Mid-Range'
+            else 'Low-Range'
+        end as priceRange : String(10)
+} where fItem.isAvailable='X';
