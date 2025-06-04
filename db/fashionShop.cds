@@ -54,3 +54,9 @@ view YC_FashionShop as select from Fashion_Items as fItem
             else 'Low-Range'
         end as priceRange : String(10)
 } where fItem.isAvailable='X';
+
+view YC_FashionType as select from Fashion_Types as fType{
+    fType.id as fashionTypeID,
+    fType.typename as fashionTypeName,
+    fType.section.name as sectionName
+}
