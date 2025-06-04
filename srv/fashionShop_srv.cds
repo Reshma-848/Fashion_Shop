@@ -15,9 +15,18 @@ annotate fashionShop.Fashion_Items with @(UI :{
         Title: {Value : itemname},
         Description : {Value:'Online Fashion Shop'}
     },
+    SelectionFields  : [
+        fashionType_id,
+        itemname,
+        brand,
+        size,
+        price
+    ],
     LineItem  : [
-        {Value: fashionType.section.name},
-        {Value: fashionType.typename},
+        {Value: fashionType.section.name,
+        Label:'Name'},
+        {Value: fashionType.typename,
+        Label:'Fashion Type'},
         {Value:itemname},
         {Value:brand},
         {Value:size},

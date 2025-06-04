@@ -5,28 +5,28 @@ using { Currency } from '@sap/cds/common';
 type Flag : String(1);
 
 entity Sections {
-    key id : UUID;
-    name : String(50);
-    description : String(64);
+    key id : UUID @(title:'Section ID');
+    name : String(50) @(title:'Section Name');
+    description : String(64) @(title:'Section Description');
 }
 
 entity Fashion_Types {
-    key id : UUID;
-    section : Association to Sections;
-    typename : String(16);
-    description : String(100);     
+    key id : UUID @(title:'Fashion Type ID');
+    section : Association to Sections @(title:'Section ID');
+    typename : String(16) @(title:'Fashion Type');
+    description : String(100) @(title:'Fashion Description');     
 }
 
 entity Fashion_Items {
-    key id : UUID;
-    fashionType : Association to Fashion_Types;
-    itemname : String(16);
-    brand : String(16);
-    size : String(8);
-    material : String(16);
-    price : String(10);
-    currency : Currency;
-    isAvailable : Flag;
+    key id : UUID @(title:'Fashion Item ID');
+    fashionType : Association to Fashion_Types @(title:'Fashion Type ID');
+    itemname : String(16) @(title:'Fashion_Item');
+    brand : String(16) @(title:'Brand');
+    size : String(8) @(title:'Size');
+    material : String(16) @(title:'Material');
+    price : String(10) @(title:'Price');
+    currency : Currency @(title:'Currency');
+    isAvailable : Flag @(title:'Is Available');
 }
 
 //View creation for Fashion_Shop
