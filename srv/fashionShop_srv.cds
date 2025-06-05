@@ -18,21 +18,21 @@ annotate fashionShop.Fashion_Items with @(UI: {
     CreateHidden: false,
     UpdateHidden: false,
     DeleteHidden: false,
-    HeaderInfo: {
+    HeaderInfo: { // Title of the Application
         $Type: 'UI.HeaderInfoType',
         TypeName: 'Online Fashion Shop',
         TypeNamePlural: 'Online Fashion Shop',
         Title: { Value: itemname },
         Description: { Value: 'Online Fashion Shop' }
     },
-    SelectionFields: [
+    SelectionFields: [ //For Filters 
         fashionType_id,
         itemname,
         brand,
         size,
         price
     ],
-    LineItem: [
+    LineItem: [ //Defines the columns shown in the list/table
         { Value: fashionType.section.name, Label: 'Name' },
         { Value: fashionType.typename, Label: 'Fashion Type' },
         { Value: itemname },
@@ -41,14 +41,14 @@ annotate fashionShop.Fashion_Items with @(UI: {
         { Value: price },
         { Value: currency_code }
     ],
-    Facets: [{
+    Facets: [{ //Tabs and Sections in Object Page
         $Type: 'UI.CollectionFacet',
         ID: '1',
         Label: 'Fashion Type & Section',
         Facets: [
             {
                 $Type: 'UI.ReferenceFacet',
-                Target: '@UI.FieldGroup#TypeSection'
+                Target: '@UI.FieldGroup#TypeSection'//data from this grp
             },
             {
                 $Type: 'UI.CollectionFacet',
@@ -56,7 +56,7 @@ annotate fashionShop.Fashion_Items with @(UI: {
                 Label: 'Fashion Item',
                 Facets: [{
                     $Type: 'UI.ReferenceFacet',
-                    Target: '@UI.FieldGroup#FItem'
+                    Target: '@UI.FieldGroup#FItem'// data from this grp
                 }]
             }
         ]
@@ -91,7 +91,7 @@ annotate fashionShop.Fashion_Items.fashionType.description with @Common.FieldCon
 annotate fashionShop.Fashion_Items.fashionType.section.id with @Common.FieldControl: #ReadOnly;
 annotate fashionShop.Fashion_Items.fashionType.section.name with @Common.FieldControl: #ReadOnly;
 
-annotate FashionShop_Service.Fashion_Items with {
+annotate FashionShop_Service.Fashion_Items with { // dropdown or F4 Help
     fashionType @title: 'Fashion Type';
     fashionType @sap.value.list: 'fixed-values';
     fashionType @Common.ValueListWithFixedValues;
